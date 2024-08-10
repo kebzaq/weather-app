@@ -13,6 +13,7 @@ const Weather = () => {
   // console.log("weather info", cityInfo.lat, cityInfo.lon);
   // Weather data to display:
   const [weatherData, setWeatherData] = useState({});
+  const [showForecast, setShowForecast] = useState(false);
   // console.log("cityInfo", cityInfo);
   const getCurrentWeather = async (lat, lon) => {
     // console.log("getCurrentWeather", lat, lon);
@@ -41,45 +42,51 @@ const Weather = () => {
     setCityInfo(cityInfo);
     // getCurrentWeather();
   };
+  const toggleForecast = () => {
+    setShowForecast(!showForecast);
+  };
   return (
-    <div className="weather">
-      {/* <div className="navbar">
+    <>
+      <div className="weather">
+        {/* <div className="navbar">
         <button className="nav-item">Current Weather</button>
         <button className="nav-item">7-day Forecast</button>
       </div> */}
-      <SearchCity handleCityInfo={handleCityInfo} />
+        <SearchCity handleCityInfo={handleCityInfo} />
 
-      <img src={clear_icon} alt="clear" className="weather-icon" />
-      <p className="temperature">
-        {weatherData.temp} <span style={{ fontSize: "40px" }}>°F</span>
-      </p>
-      <p className="location">{cityInfo.name}</p>
-      <p className="location2">
-        {cityInfo.admin1}
-        {cityInfo.admin1 ? "," : ""} {cityInfo.country_code}
-      </p>
-      <div className="weather-data">
-        <div className="col">
-          <img src={humidity_icon} alt="" />
-          <div>
-            <p>{weatherData.humidity}</p>
-            <span>Humidity</span>
+        <img src={clear_icon} alt="clear" className="weather-icon" />
+        <p className="temperature">
+          {weatherData.temp} <span style={{ fontSize: "40px" }}>°F</span>
+        </p>
+        <p className="location">{cityInfo.name}</p>
+        <p className="location2">
+          {cityInfo.admin1}
+          {cityInfo.admin1 ? "," : ""} {cityInfo.country_code}
+        </p>
+        <div className="weather-data">
+          <div className="col">
+            <img src={humidity_icon} alt="" />
+            <div>
+              <p>{weatherData.humidity}</p>
+              <span>Humidity</span>
+            </div>
+          </div>
+          <div className="col">
+            <img src={wind_icon} alt="" />
+            <div>
+              <p>{weatherData.windSpeed} Mph</p>
+              <span>Wind Speed</span>
+            </div>
           </div>
         </div>
-        <div className="col">
-          <img src={wind_icon} alt="" />
-          <div>
-            <p>{weatherData.windSpeed} Mph</p>
-            <span>Wind Speed</span>
-          </div>
-        </div>
+        <button className="nav-item" onClick={toggleForecast}>
+          {showForecast ? "Hide 7-day Forecast" : "Show 7-day Forecast"}
+        </button>
       </div>
-      {cityInfo.lat & cityInfo.lon ? (
-        <Forecast lat={cityInfo.lat} lon={cityInfo.lon} />
-      ) : (
-        ""
-      )}
-    </div>
+      <div className="forecast">
+        {showForecast && <Forecast lat={cityInfo.lat} lon={cityInfo.lon} />}
+      </div>
+    </>
   );
 };
 

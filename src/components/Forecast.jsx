@@ -26,7 +26,7 @@ const Forecast = ({ lat, lon }) => {
   const { time, temperature_2m_max, temperature_2m_min, weather_code } =
     forecastData;
   return (
-    <>
+    <div className="forecast-container">
       {time &&
         time.map((date, index) => (
           <div key={index} className="forecast-card">
@@ -39,7 +39,7 @@ const Forecast = ({ lat, lon }) => {
             <p>Min: {temperature_2m_min[index]}°F</p>
           </div>
         ))}
-    </>
+    </div>
   );
 };
 
