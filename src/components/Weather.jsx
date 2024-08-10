@@ -5,20 +5,22 @@ import clear_icon from "../assets/clear.png";
 import humidity_icon from "../assets/humidity.png";
 import wind_icon from "../assets/wind.png";
 import SearchCity from "./SearchCity";
+import Forecast from "./Forecast";
 
 const Weather = () => {
   // City data to get weather info:
   const [cityInfo, setCityInfo] = useState({});
+  // console.log("weather info", cityInfo.lat, cityInfo.lon);
   // Weather data to display:
   const [weatherData, setWeatherData] = useState({});
   // console.log("cityInfo", cityInfo);
-  const getWeather = async () => {
-    console.log(cityInfo.lat, cityInfo.lon);
+  const getCurrentWeather = async (lat, lon) => {
+    // console.log("getCurrentWeather", lat, lon);
     try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${cityInfo.lat}&longitude=${cityInfo.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log("curren", data.current);
+      // console.log("curren", data.current);
       // console.log("temperature: ", data.current.temperature_2m);
       setWeatherData({
         temp: data.current.temperature_2m,
@@ -30,26 +32,32 @@ const Weather = () => {
     }
   };
   useEffect(() => {
-    getWeather(cityInfo.lat, cityInfo.lon);
+    if (cityInfo.lat ?? cityInfo.lon) {
+      getCurrentWeather(cityInfo.lat, cityInfo.lon);
+    }
   }, [cityInfo]);
   // callback function to update the getCityInfo state
   const handleCityInfo = (cityInfo) => {
     setCityInfo(cityInfo);
-    getWeather();
+    // getCurrentWeather();
   };
   return (
     <div className="weather">
-      {/* <div className="search-bar">
-        <input type="text" placeholder="search..." />
-        <img src={search_icon} alt="Search" />
+      {/* <div className="navbar">
+        <button className="nav-item">Current Weather</button>
+        <button className="nav-item">7-day Forecast</button>
       </div> */}
       <SearchCity handleCityInfo={handleCityInfo} />
+
       <img src={clear_icon} alt="clear" className="weather-icon" />
       <p className="temperature">
         {weatherData.temp} <span style={{ fontSize: "40px" }}>°F</span>
       </p>
       <p className="location">{cityInfo.name}</p>
-      <h6>{}</h6>
+      <p className="location2">
+        {cityInfo.admin1}
+        {cityInfo.admin1 ? "," : ""} {cityInfo.country_code}
+      </p>
       <div className="weather-data">
         <div className="col">
           <img src={humidity_icon} alt="" />
@@ -66,6 +74,11 @@ const Weather = () => {
           </div>
         </div>
       </div>
+      {cityInfo.lat & cityInfo.lon ? (
+        <Forecast lat={cityInfo.lat} lon={cityInfo.lon} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
