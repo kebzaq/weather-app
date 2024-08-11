@@ -49,7 +49,7 @@ const Weather = () => {
         <SearchCity handleCityInfo={handleCityInfo} />
 
         <img
-          src={`src/assets/${weatherIconMap[weatherCode] || "clear.png"}`}
+          src={`assets/${weatherIconMap[weatherCode] || "clear.png"}`}
           alt="weather icon"
           className="weather-icon"
         />
