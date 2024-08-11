@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 const Forecast = ({ lat, lon }) => {
   const [forecastData, setForecastData] = useState({});
-  console.log("forecast", lat, lon);
   const getForecast = async (lat, lon) => {
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`;
