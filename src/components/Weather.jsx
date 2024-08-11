@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./Weather.css";
-import search_icon from "../assets/search.png";
-import clear_icon from "../assets/clear.png";
 import humidity_icon from "../assets/humidity.png";
 import wind_icon from "../assets/wind.png";
 import SearchCity from "./SearchCity";
 import Forecast from "./Forecast";
+import { weatherIconMap } from "./weatherIconMap";
 
 const Weather = () => {
   // City data to get weather info:
   const [cityInfo, setCityInfo] = useState({});
   // Weather data to display:
   const [weatherData, setWeatherData] = useState({});
+  console.log(weatherData);
+  const weatherCode = weatherData.weatherCode || 0;
+  console.log("weatherCode", weatherCode);
   const [showForecast, setShowForecast] = useState(false);
   const getCurrentWeather = async (lat, lon) => {
     try {
@@ -22,6 +24,7 @@ const Weather = () => {
         temp: data.current.temperature_2m,
         humidity: data.current.relative_humidity_2m,
         windSpeed: data.current.wind_speed_10m,
+        weatherCode: data.current.weather_code,
       });
     } catch (err) {
       console.error("Failed to fetch weather data", err);
@@ -39,12 +42,17 @@ const Weather = () => {
   const toggleForecast = () => {
     setShowForecast(!showForecast);
   };
+
   return (
     <>
       <div className="weather">
         <SearchCity handleCityInfo={handleCityInfo} />
 
-        <img src={clear_icon} alt="clear" className="weather-icon" />
+        <img
+          src={`src/assets/${weatherIconMap[weatherCode] || "clear.png"}`}
+          alt="weather icon"
+          className="weather-icon"
+        />
         <p className="temperature">
           {weatherData.temp} <span style={{ fontSize: "40px" }}>°F</span>
         </p>
@@ -57,7 +65,7 @@ const Weather = () => {
           <div className="col">
             <img src={humidity_icon} alt="" />
             <div>
-              <p>{weatherData.humidity}</p>
+              <p>{weatherData.humidity} %</p>
               <span>Humidity</span>
             </div>
           </div>
