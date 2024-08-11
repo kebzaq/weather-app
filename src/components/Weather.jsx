@@ -10,19 +10,14 @@ import Forecast from "./Forecast";
 const Weather = () => {
   // City data to get weather info:
   const [cityInfo, setCityInfo] = useState({});
-  // console.log("weather info", cityInfo.lat, cityInfo.lon);
   // Weather data to display:
   const [weatherData, setWeatherData] = useState({});
   const [showForecast, setShowForecast] = useState(false);
-  // console.log("cityInfo", cityInfo);
   const getCurrentWeather = async (lat, lon) => {
-    // console.log("getCurrentWeather", lat, lon);
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`;
       const response = await fetch(url);
       const data = await response.json();
-      // console.log("curren", data.current);
-      // console.log("temperature: ", data.current.temperature_2m);
       setWeatherData({
         temp: data.current.temperature_2m,
         humidity: data.current.relative_humidity_2m,
@@ -40,7 +35,6 @@ const Weather = () => {
   // callback function to update the getCityInfo state
   const handleCityInfo = (cityInfo) => {
     setCityInfo(cityInfo);
-    // getCurrentWeather();
   };
   const toggleForecast = () => {
     setShowForecast(!showForecast);
@@ -48,10 +42,6 @@ const Weather = () => {
   return (
     <>
       <div className="weather">
-        {/* <div className="navbar">
-        <button className="nav-item">Current Weather</button>
-        <button className="nav-item">7-day Forecast</button>
-      </div> */}
         <SearchCity handleCityInfo={handleCityInfo} />
 
         <img src={clear_icon} alt="clear" className="weather-icon" />
@@ -79,7 +69,7 @@ const Weather = () => {
             </div>
           </div>
         </div>
-        <button className="nav-item" onClick={toggleForecast}>
+        <button className="forecast-btn" onClick={toggleForecast}>
           {showForecast ? "Hide 7-day Forecast" : "Show 7-day Forecast"}
         </button>
       </div>

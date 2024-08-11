@@ -88,7 +88,24 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #3f4aa9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  /* background-image: linear-gradient(45deg, #848fa9, #5019c7); */
+  color: #f7f7f9;
+}
+.forecast-btn {
+  margin-top: 30px;
+  padding: 5px 10px;
+  background-color: #0d1c4c;
+  color: #efc77d;
+  border: 1px solid #efc77d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.forecast-temp {
+  font-size: 20px;
+}
+.forecast-date {
+  color: #efc77d;
 }

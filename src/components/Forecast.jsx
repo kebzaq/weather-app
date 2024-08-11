@@ -30,13 +30,13 @@ const Forecast = ({ lat, lon }) => {
       {time &&
         time.map((date, index) => (
           <div key={index} className="forecast-card">
-            <p>{new Date(date).toDateString()}</p>
+            <p className="forecast-date">{new Date(date).toDateString()}</p>
             {/* <img
             src={`https://example.com/weather-icons/${day.weathercode}.png`}
             alt="weather icon"
           /> */}
-            <p>Max: {temperature_2m_max[index]}°F</p>
-            <p>Min: {temperature_2m_min[index]}°F</p>
+            <p className="forecast-temp">Max: {temperature_2m_max[index]}°F</p>
+            <p className="forecast-temp">Min: {temperature_2m_min[index]}°F</p>
           </div>
         ))}
     </div>
