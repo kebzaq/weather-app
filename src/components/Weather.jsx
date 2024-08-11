@@ -11,9 +11,7 @@ const Weather = () => {
   const [cityInfo, setCityInfo] = useState({});
   // Weather data to display:
   const [weatherData, setWeatherData] = useState({});
-  console.log(weatherData);
   const weatherCode = weatherData.weatherCode || 0;
-  console.log("weatherCode", weatherCode);
   const [showForecast, setShowForecast] = useState(false);
   const getCurrentWeather = async (lat, lon) => {
     try {

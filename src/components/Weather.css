@@ -6,8 +6,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 100%;
-  max-width: 1200px; */
 }
 
 .search-bar {
@@ -76,22 +74,20 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  overflow-x: auto; /* Allows horizontal scrolling if the container is too small */
-  gap: 16px; /* Space between cards */
+  overflow-x: auto;
+  gap: 16px;
   padding: 10px;
-  /* Optional styling */
 }
 
 .forecast-card {
-  flex: 0 0 auto; /* Ensures cards don't shrink and stay at their content size */
-  width: 200px; /* Adjust width as needed */
+  flex: 0 0 auto;
+  width: 200px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #3f4aa9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  /* background-image: linear-gradient(45deg, #848fa9, #5019c7); */
   color: #f7f7f9;
 }
 .forecast-btn {

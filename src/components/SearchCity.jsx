@@ -15,7 +15,6 @@ const SearchCity = ({ handleCityInfo }) => {
       const url = `https://geocoding-api.open-meteo.com/v1/search?name=${search}&count=1&language=en&format=json`;
       const response = await fetch(url);
       const data = await response.json();
-      //   console.log("Search results: ", data);
       if (data.results.length === 0) {
         throw new Error("City or location not found");
       }
