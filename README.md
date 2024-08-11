@@ -11,7 +11,7 @@ Search Functionality: Enter the name of a city in the search field to get weathe
 
 ## Public Weather API
 
-The app uses the Open-Meteo public API. You can find the API documentation here: Open-Meteo API Documentation
+The app uses the Open-Meteo public API. You can find the API documentation here: https://open-meteo.com/en/docs
 
 The application makes three main API calls to function:
 
@@ -21,6 +21,6 @@ The application makes three main API calls to function:
 
 ## Live Demo
 
-Check out the live demo of the Weather App here: Weather App Demo
+Check out the live demo of the Weather App here: https://weather-applook.netlify.app/
 
 Enjoy exploring the weather updates!
