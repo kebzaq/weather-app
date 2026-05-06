@@ -6,7 +6,7 @@ import SearchCity from "./SearchCity";
 import Forecast from "./Forecast";
 import { weatherIconMap } from "./weatherIconMap";
 
-const Weather = () => {
+const Weather = ({ darkMode, toggleDarkMode }) => {
   // City data to get weather info:
   const [cityInfo, setCityInfo] = useState({});
   // Weather data to display:
@@ -43,7 +43,13 @@ const Weather = () => {
 
   return (
     <>
-      <div className="weather">
+      <div className={`weather${darkMode ? " dark" : ""}`}>
+        <div className="title-row">
+          <h1 className="app-title">Weather Now</h1>
+          <button className="theme-toggle-btn" onClick={toggleDarkMode} title="Toggle dark/light mode">
+            {darkMode ? "☀" : "☽"}
+          </button>
+        </div>
         <SearchCity handleCityInfo={handleCityInfo} />
 
         <img
@@ -80,7 +86,7 @@ const Weather = () => {
         </button>
       </div>
       <div className="forecast">
-        {showForecast && <Forecast lat={cityInfo.lat} lon={cityInfo.lon} />}
+        {showForecast && <Forecast lat={cityInfo.lat} lon={cityInfo.lon} darkMode={darkMode} />}
       </div>
     </>
   );

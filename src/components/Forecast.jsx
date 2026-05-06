@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Forecast = ({ lat, lon }) => {
+const Forecast = ({ lat, lon, darkMode }) => {
   const [forecastData, setForecastData] = useState({});
   const getForecast = async (lat, lon) => {
     try {
@@ -23,7 +23,7 @@ const Forecast = ({ lat, lon }) => {
     <div className="forecast-container">
       {time &&
         time.map((date, index) => (
-          <div key={index} className="forecast-card">
+          <div key={index} className={`forecast-card${darkMode ? " dark" : ""}`}>
             <p className="forecast-date">{new Date(date).toDateString()}</p>
             <p className="forecast-temp">Max: {temperature_2m_max[index]}°F</p>
             <p className="forecast-temp">Min: {temperature_2m_min[index]}°F</p>
