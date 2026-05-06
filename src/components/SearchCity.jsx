@@ -41,6 +41,7 @@ const SearchCity = ({ handleCityInfo }) => {
           placeholder="search..."
           value={search}
           onChange={handleSearchChange}
+          onKeyDown={(e) => e.key === "Enter" && handleClick()}
         />
         <img src={search_icon} alt="Search" onClick={handleClick} />
       </div>
